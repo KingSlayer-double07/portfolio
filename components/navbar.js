@@ -97,18 +97,19 @@ class CustomNavbar extends HTMLElement {
             </style>
             
             <nav>
-                <a href="/" class="logo">Favour Akande</a>
+                <a href="#" class="logo">Favour Akande</a>
                 
                 <button class="mobile-menu-btn">
                     <i data-feather="menu"></i>
                 </button>
                 
                 <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a class="nav__link" href="#about">01. About</a></li>
+                    <li><a class="nav__link" href="#projects">02. Projects</a></li>
+                    <li><a class="nav__link" href="#contact">03. Contact</a></li>
                 </ul>
             </nav>
+
         `;
         
         // Initialize mobile menu functionality
