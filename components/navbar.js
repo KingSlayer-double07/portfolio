@@ -61,6 +61,10 @@ class CustomNavbar extends HTMLElement {
                 .nav-links a:hover::after {
                     width: 100%;
                 }
+
+                .nav-links a[aria-current="page"]::after {
+                    width: 100%;
+                }
                 
                 .mobile-menu-btn {
                     display: none;
