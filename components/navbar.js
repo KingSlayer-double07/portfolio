@@ -118,8 +118,11 @@ class CustomNavbar extends HTMLElement {
         
         // Initialize mobile menu functionality
         this.initMobileMenu();
+        this.initSmoothScroll();
+        this.initActiveLink();
+        if (typeof feather !== 'undefined') feather.replace();
     }
-    
+
     initMobileMenu() {
         const menuBtn = this.shadowRoot.querySelector('.mobile-menu-btn');
         const navLinks = this.shadowRoot.querySelector('.nav-links');
@@ -136,6 +139,49 @@ class CustomNavbar extends HTMLElement {
             });
         });
     }
+    
+    initSmoothScroll() {
+        const links = this.shadowRoot.querySelectorAll('.nav-links a');
+        links.forEach(a => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href') || '';
+                if (!href.startsWith('#')) return;
+                const id = href.slice(1);
+                const target = document.getElementById(id);
+                if (!target) return;
+                e.preventDefault();
+                const offset = 80; // Height of the navbar
+                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            });
+        });
+    }
+
+    initActiveLink() {
+        const sections = [...document.querySelectorAll('section[id]')];
+        const links = [...this.shadowRoot.querySelectorAll('.nav__link')];
+
+        const setActive = () => {
+            const y = window.scrollY + 120;
+            let activeId = null;
+            for (const s of sections) {
+                const top = s.offsetTop;
+                const bottom = top + s.offsetHeight;
+                if (y >= top && y < bottom) { activeId = s.id; break; }
+            }
+            links.forEach(a => {
+                const href = a.getAttribute('href') || '';
+                const id = href.startsWith('#') ? href.slice(1) : null;
+                a.removeAttribute('aria-current');
+                if (id && id === activeId) a.setAttribute('aria-current', 'page');
+            });
+        };
+
+        window.addEventListener('scroll', setActive);
+        window.addEventListener('load', setActive);  
+        setActive();
+    }
+
 }
 
 customElements.define('custom-navbar', CustomNavbar);
