@@ -1,7 +1,7 @@
 class CustomFooter extends HTMLElement {
-    connectedCallback() {
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `
+  connectedCallback() {
+    this.attachShadow({ mode: "open" })
+    this.shadowRoot.innerHTML = `
             <style>
                 footer {
                     background: rgba(17, 24, 39, 0.8);
@@ -77,8 +77,8 @@ class CustomFooter extends HTMLElement {
                     <p class="copyright">&copy; ${new Date().getFullYear()} Favour Akande. All rights reserved.</p>
                 </div>
             </footer>
-        `;
-    }
+        `
+  }
 }
 
-customElements.define('custom-footer', CustomFooter);
+customElements.define("custom-footer", CustomFooter)
