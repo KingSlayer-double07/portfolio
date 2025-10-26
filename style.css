@@ -1,21 +1,120 @@
+/* screen-reader only utility */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Keyboard focus ring  */
+:where(a, button, input, textarea, select, summary, [tabindex]) :is(:focus-visible) {
+    outline: 3px solid rgba(139, 92, 246, 0.85);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001s !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.project-image {
+    aspect-ratio: 16 / 9;
+    max-height: 320px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* small screens */
+@media (max-width: 480px) {
+    .project-image {
+        max-height: 220px;
+    }
+}
+
+a:focus-visible,
+button:focus-visible,
+.project-link:focus-visible,
+.social-icon:focus-visible,
+.skill-chip:focus-visible {
+    outline: 3px solid rgba(139, 92, 246, 0.85);
+    outline-offset: 3px;
+}
+
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes pulseSlow {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.1; }
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.1;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@keyframes herotextanimate {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-fadeIn {
@@ -62,7 +161,11 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .project-card:hover {
@@ -77,9 +180,9 @@
 
 .project-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     transition: transform 0.5s ease;
+    object-fit: cover;
 }
 
 .project-card:hover .project-image img {
@@ -107,6 +210,9 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
 }
 
 .project-tags span {
@@ -147,25 +253,9 @@
     box-shadow: 0 5px 15px -5px rgba(126, 34, 206, 0.3);
 }
 
-.project-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-}
-
-.project-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-    --font-sans: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    --font-mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+:root {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-red-500: oklch(63.7% .237 25.331);
     --color-sky-950: oklch(29.3% .066 243.157);
     --color-blue-400: oklch(70.7% .165 254.624);
@@ -210,15 +300,11 @@
     --tracking-wider: .05em;
     --radius-md: .375rem;
     --radius-lg: .5rem;
-    --ease-out: cubic-bezier(0,0,.2,1);
+    --ease-out: cubic-bezier(0, 0, .2, 1);
     --default-transition-duration: .15s;
-    --default-transition-timing-function: cubic-bezier(.4,0,.2,1);
+    --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
-    text-size-adjust: 100%;
-    tab-size: 4;
-    font-feature-settings: var(--default-font-feature-settings,normal);
-    font-variation-settings: var(--default-font-variation-settings,normal);
     -webkit-tap-highlight-color: transparent;
     --animate-duration: 1s;
     --animate-delay: 1s;
@@ -242,21 +328,21 @@
     --xyz-perspective-none: none;
     font-family: Poppins, sans-serif;
     color: rgb(242, 242, 242);
-    user-select: none;
     --tw-tracking: var(--tracking-wider);
     letter-spacing: var(--tracking-wider);
-    white-space: nowrap;
     --tw-duration: .7s;
-    line-height: 1;
-    box-sizing: border-box;
+    line-height: 1.2;
     border-width: 0px;
     border-style: solid;
     border-color: initial;
     border-image: initial;
-    margin: 0px;
-    padding: 0px;
-    text-align: center;
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
-    font-size: 12px;
+    /* base font-size: increased for accessibility */
+    font-size: 16px;
     animation: 1.25s ease 0.25s 1 normal none running herotextanimate;
+    text-size-adjust: 100%;
+    tab-size: 4;
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+}
