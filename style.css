@@ -146,6 +146,24 @@
     transform: translateY(-3px);
     box-shadow: 0 5px 15px -5px rgba(126, 34, 206, 0.3);
 }
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
     --font-sans: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     --font-mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     --color-red-500: oklch(63.7% .237 25.331);
