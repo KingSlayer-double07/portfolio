@@ -70,6 +70,14 @@ html { scroll-behavior: smooth; }
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .shimmer { animation: none !important; }
+}
+@media (pointer: coarse){
+  .tilt {transform: none !important;}
+  .tilt:hover {transform: none !important;}
+}
 
-/* ===== Optional: subtle section dividers ===== */
-section { scroll-margin-top: 80px; } /* helpful if you have a sticky nav */
+/* ===== Subtle section dividers ===== */
+section { scroll-margin-top: 80px; }
