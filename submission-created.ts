@@ -1,8 +1,10 @@
-export function sendNotification(): void {
-    const message = 'Form Submission Success';
-    const type: 'success' | 'error' | 'info' = 'info';
+export function sendNotification(
+    message: string = 'Form Submission Success',
+    type: 'success' | 'error' | 'info' = 'info',
+    details?: Record<string, unknown>
+): void {
     const event = new CustomEvent('notification', {
-        detail: { message, type }
+        detail: { message, type, details },
     });
     window.dispatchEvent(event);
 }

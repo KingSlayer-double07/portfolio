@@ -34,13 +34,36 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el)
   })
 
-  {/* // Form submission handler
-  const contactForm = document.querySelector("form")
+  // Form submission handler — gather form values, dispatch event and optionally call sendNotification
+  const contactForm = document.querySelector('#contact-form')
+  function getContactFormValues(form) {
+    const data = new FormData(form)
+    // Convert FormData entries to a plain object
+    return Object.fromEntries(data.entries())
+  }
+
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      alert("Thank you for your message! I will get back to you soon.")
+    contactForm.addEventListener('submit', (e) => {
+      const values = getContactFormValues(contactForm)
+      // Log / return values
+      console.log('Contact form values:', values)
+
+      // Dispatch a `formSubmitted` custom event with the collected values
+      window.dispatchEvent(new CustomEvent('formSubmitted', { detail: values }))
+
+      // Try calling sendNotification if it's available (from submission-created.ts)
+      if (typeof sendNotification === 'function') {
+        try {
+          sendNotification(`New message from ${values.name || 'Guest'}`, 'success')
+        } catch (err) {
+          console.warn('sendNotification threw an error', err)
+        }
+      } else {
+        // Fallback: simple alert for environments without sendNotification
+        alert('Thanks! We received your message.')
+      }
+
       contactForm.reset()
     })
-  } */}
+  }
 })
