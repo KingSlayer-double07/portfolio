@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el)
   })
 
-  // Form submission handler
+  {/* // Form submission handler
   const contactForm = document.querySelector("form")
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
@@ -42,5 +42,5 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Thank you for your message! I will get back to you soon.")
       contactForm.reset()
     })
-  }
+  } */}
 })
