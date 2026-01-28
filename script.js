@@ -34,36 +34,102 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(el)
   })
 
-  // Form submission handler — gather form values, dispatch event and optionally call sendNotification
+  // Form submission handler — validate, gather form values, and submit to Netlify
   const contactForm = document.querySelector('#contact-form')
+  const submitBtn = document.querySelector('#submit-btn')
+  const formStatus = document.querySelector('#form-status')
+  
   function getContactFormValues(form) {
     const data = new FormData(form)
     // Convert FormData entries to a plain object
     return Object.fromEntries(data.entries())
   }
 
+  function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
+  function showFormStatus(message, type) {
+    formStatus.textContent = message
+    formStatus.className = `block text-sm mt-2 ${type === 'success' ? 'text-green-400' : 'text-red-400'}`
+  }
+
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      const values = getContactFormValues(contactForm)
-      // Log / return values
-      console.log('Contact form values:', values)
-
-      // Dispatch a `formSubmitted` custom event with the collected values
-      window.dispatchEvent(new CustomEvent('formSubmitted', { detail: values }))
-
-      // Try calling sendNotification if it's available (from submission-created.ts)
-      if (typeof sendNotification === 'function') {
-        try {
-          sendNotification(`New message from ${values.name || 'Guest'}`, 'success')
-        } catch (err) {
-          console.warn('sendNotification threw an error', err)
-        }
-      } else {
-        // Fallback: simple alert for environments without sendNotification
-        alert('Thanks! We received your message.')
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      
+      // Validate form using native HTML5 validation
+      if (!contactForm.checkValidity()) {
+        showFormStatus('Please fill in all required fields correctly.', 'error')
+        contactForm.reportValidity()
+        return
       }
 
-      contactForm.reset()
+      const values = getContactFormValues(contactForm)
+      
+      // Additional email validation
+      if (!validateEmail(values.email)) {
+        document.querySelector('#email-error').classList.remove('hidden')
+        showFormStatus('Please enter a valid email address.', 'error')
+        return
+      }
+
+      // Validate message length
+      if (values.message.trim().length < 10) {
+        document.querySelector('#message-error').classList.remove('hidden')
+        showFormStatus('Message must be at least 10 characters.', 'error')
+        return
+      }
+
+      // Disable submit button and show loading state
+      submitBtn.disabled = true
+      submitBtn.setAttribute('aria-busy', 'true')
+      submitBtn.textContent = 'Sending...'
+      showFormStatus('', 'info')
+
+      try {
+        // Submit form data to Netlify
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            'form-name': contactForm.getAttribute('name'),
+            ...values
+          }).toString()
+        })
+
+        if (response.ok) {
+          console.log('Form submitted successfully:', values)
+          showFormStatus('✓ Thanks! Your message has been sent. I\'ll get back to you soon!', 'success')
+          contactForm.reset()
+          
+          // Dispatch custom event for any listeners
+          window.dispatchEvent(new CustomEvent('formSubmitted', { detail: values }))
+        } else {
+          throw new Error('Form submission failed')
+        }
+      } catch (err) {
+        console.error('Form submission error:', err)
+        showFormStatus('✗ Error sending message. Please try again or email me directly.', 'error')
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false
+        submitBtn.setAttribute('aria-busy', 'false')
+        submitBtn.textContent = 'Send Message'
+      }
+    })
+
+    // Clear error messages when user starts typing
+    const formInputs = contactForm.querySelectorAll('input, textarea, select')
+    formInputs.forEach(input => {
+      input.addEventListener('input', () => {
+        const errorId = input.getAttribute('aria-describedby')
+        if (errorId) {
+          const errorEl = document.querySelector(`#${errorId}`)
+          if (errorEl) errorEl.classList.add('hidden')
+        }
+      })
     })
   }
 })

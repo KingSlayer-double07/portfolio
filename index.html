@@ -300,8 +300,12 @@
               <input
                 type="text"
                 id="name"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
-                name="name"/>
+                name="name"
+                required
+                aria-required="true"
+                aria-describedby="name-error"
+                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              <span id="name-error" class="hidden text-red-400 text-sm mt-1">Please enter your name</span>
             </div>
             <div>
               <label
@@ -313,7 +317,11 @@
                 type="email"
                 id="email"
                 name="email"
+                required
+                aria-required="true"
+                aria-describedby="email-error"
                 class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+              <span id="email-error" class="hidden text-red-400 text-sm mt-1">Please enter a valid email address</span>
             </div>
             <div>
               <label
@@ -325,7 +333,12 @@
                 id="message"
                 name="message"
                 rows="5"
+                required
+                minlength="10"
+                aria-required="true"
+                aria-describedby="message-error"
                 class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+              <span id="message-error" class="hidden text-red-400 text-sm mt-1">Message must be at least 10 characters</span>
             </div>
             <div>
               <label
@@ -336,7 +349,10 @@
               <select
                 id="reason"
                 name="reason"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                required
+                aria-required="true"
+                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none">
+                <option value="">Select a reason</option>
                 <option value="hiring">Hiring</option>
                 <option value="freelance">Freelance Project</option>
                 <option value="collaboration">Collaboration</option>
@@ -345,9 +361,12 @@
             </div>
             <button
               type="submit"
-              class="w-full sm:w-auto px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-all shadow-lg hover:shadow-purple-500/30"
+              class="w-full sm:w-auto px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-all shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-busy="false"
+              id="submit-btn"
               > Send Message
             </button>
+            <span id="form-status" class="hidden text-sm mt-2 block"></span>
           </form>
 
           <div class="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
