@@ -75,6 +75,16 @@ class CustomNavbar extends HTMLElement {
                     font-size: 1.5rem;
                     cursor: pointer;
                 }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    stroke: currentColor;
+                    stroke-width: 2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    fill: none;
+                }
                 
                 @media (max-width: 768px) {
                     .mobile-menu-btn {
@@ -104,11 +114,15 @@ class CustomNavbar extends HTMLElement {
             <nav>
                 <a href="#" class="logo">Favour Akande</a>
                 
-                <button class="mobile-menu-btn">
-                    <i data-feather="menu"></i>
+                <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
                 
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links">
                     <li><a class="nav__link" href="#about">01. About</a></li>
                     <li><a class="nav__link" href="#projects">02. Projects</a></li>
                     <li><a class="nav__link" href="#contact">03. Contact</a></li>
@@ -119,9 +133,7 @@ class CustomNavbar extends HTMLElement {
 
     // Initialize mobile menu functionality
     this.initMobileMenu()
-    this.initSmoothScroll()
     this.initActiveLink()
-    if (typeof feather !== "undefined") feather.replace()
   }
 
   initMobileMenu() {
@@ -129,32 +141,15 @@ class CustomNavbar extends HTMLElement {
     const navLinks = this.shadowRoot.querySelector(".nav-links")
 
     menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("active")
-      feather.replace()
+      const isOpen = navLinks.classList.toggle("active")
+      menuBtn.setAttribute("aria-expanded", isOpen)
     })
 
     // Close menu when clicking on a link (for mobile)
     this.shadowRoot.querySelectorAll(".nav-links a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active")
-      })
-    })
-  }
-
-  initSmoothScroll() {
-    const links = this.shadowRoot.querySelectorAll(".nav-links a")
-    links.forEach((a) => {
-      a.addEventListener("click", (e) => {
-        const href = a.getAttribute("href") || ""
-        if (!href.startsWith("#")) return
-        const id = href.slice(1)
-        const target = document.getElementById(id)
-        if (!target) return
-        e.preventDefault()
-        const offset = 80 // Height of the navbar
-        const top =
-          target.getBoundingClientRect().top + window.pageYOffset - offset
-        window.scrollTo({ top, behavior: "smooth" })
+        menuBtn.setAttribute("aria-expanded", false)
       })
     })
   }
