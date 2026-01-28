@@ -69,16 +69,3 @@ function setActiveNav() {
 }
 window.addEventListener("scroll", setActiveNav)
 window.addEventListener("load", setActiveNav)
-
-// Optional: smooth scroll offset fix for sticky nav (if needed)
-document.addEventListener("click", (e) => {
-  const a = e.target.closest('a[href^="#"]')
-  if (!a) return
-  const id = a.getAttribute("href").slice(1)
-  const target = document.getElementById(id)
-  if (!target) return
-  e.preventDefault()
-  const offset = 80 // nav height
-  const top = target.getBoundingClientRect().top + window.pageYOffset - offset
-  window.scrollTo({ top, behavior: "smooth" })
-})
