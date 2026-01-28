@@ -53,6 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function showFormStatus(message, type) {
     formStatus.textContent = message
     formStatus.className = `block text-sm mt-2 ${type === 'success' ? 'text-green-400' : 'text-red-400'}`
+    
+    // Auto-hide success message after 5 seconds
+    if (type === 'success') {
+      setTimeout(() => {
+        formStatus.className = 'hidden'
+      }, 5000)
+    }
   }
 
   if (contactForm) {
@@ -106,12 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
           
           // Dispatch custom event for any listeners
           window.dispatchEvent(new CustomEvent('formSubmitted', { detail: values }))
+        } else if (response.status >= 400 && response.status < 500) {
+          throw new Error('Invalid form submission. Please check your input.')
+        } else if (response.status >= 500) {
+          throw new Error('Server error. Please try again later.')
         } else {
           throw new Error('Form submission failed')
         }
       } catch (err) {
         console.error('Form submission error:', err)
-        showFormStatus('✗ Error sending message. Please try again or email me directly.', 'error')
+        
+        // Provide specific error messages
+        let errorMsg = '✗ Error sending message. '
+        if (err.message.includes('Invalid form')) {
+          errorMsg += 'Please check your input and try again.'
+        } else if (err.message.includes('Server error')) {
+          errorMsg += 'The server is temporarily unavailable. Please try again later.'
+        } else if (err instanceof TypeError) {
+          errorMsg += 'Network error. Please check your connection and try again.'
+        } else {
+          errorMsg += 'Please try again or email me directly at favourakande1@gmail.com'
+        }
+        showFormStatus(errorMsg, 'error')
       } finally {
         // Re-enable submit button
         submitBtn.disabled = false
