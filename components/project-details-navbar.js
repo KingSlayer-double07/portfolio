@@ -112,7 +112,7 @@ class ProjectDetailsNavbar extends HTMLElement {
             </style>
             
             <nav>
-                <a href="#about" class="logo">Back to home page</a>
+                <a href="index.html" class="logo">Back to home page</a>
                 
                 <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                     <svg viewBox="0 0 24 24">
@@ -123,9 +123,9 @@ class ProjectDetailsNavbar extends HTMLElement {
                 </button>
                 
                 <ul class="nav-links" id="nav-links">
-                    <li><a class="nav__link" href="#about">01. About</a></li>
-                    <li><a class="nav__link" href="#projects">02. Projects</a></li>
-                    <li><a class="nav__link" href="#contact">03. Contact</a></li>
+                    <li><a class="nav__link" href="index.html#about">01. About</a></li>
+                    <li><a class="nav__link" href="index.html#projects">02. Projects</a></li>
+                    <li><a class="nav__link" href="index.html#contact">03. Contact</a></li>
                 </ul>
             </nav>
 

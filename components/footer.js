@@ -75,9 +75,9 @@ class CustomFooter extends HTMLElement {
             <footer>
                 <div class="footer-content">
                     <div class="footer-links">
-                        <a href="#about">About</a>
-                        <a href="#projects">Projects</a>
-                        <a href="#contact">Contact</a>
+                        <a href="index.html#about">About</a>
+                        <a href="index.html#projects">Projects</a>
+                        <a href="index.html#contact">Contact</a>
                     </div>
                     
                     <div class="social-icons">
