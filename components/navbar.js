@@ -112,7 +112,7 @@ class CustomNavbar extends HTMLElement {
             </style>
             
             <nav>
-                <a href="#" class="logo">Favour Akande</a>
+                <a href="#about" class="logo">Favour Akande</a>
                 
                 <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                     <svg viewBox="0 0 24 24">
