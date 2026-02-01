@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern GPA Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="animation.css" />
+</head>
+
+<body class="font-poppins bg-gray-900 text-white">
+    <project-details-navbar></project-details-navbar>
+
+    <div id="vanta-bg" class="fixed inset-0 -z-10"></div>
+
+    <main class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <section id="header">
+            <!-- Project 2 -->
+            <div class="project-card tilt reveal" data-reveal="up" data-delay="150">
+                <div class="project-content">
+                    <h3 class="text-lg sm:text-xl font-semibold">
+                        Modern GPA Calculator
+                    </h3>
+                    <p class="text-sm sm:text-base text-gray-300">
+                        A cross-platform mobile app that helps students calculate their GPA quickly and accurately, with
+                        a clean
+                        interface designed for fast course and grade input.
+                    </p>
+                    <div class="project-tags">
+                        <span>React Native</span>
+                        <span>TypeScript</span>
+                        <span>Expo</span>
+                        <span>node.js</span>
+                        <span>AsyncStorage</span>
+                    </div>
+                    <a href="https://github.com/KingSlayer-double07/GPA_Calculator.git" class="project-link">View
+                        Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Content Section -->
+        <section id="content" class="mt-8">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4">Problem:</h2>
+            <p>Many students struggle to calculate their GPA accurately, often relying on manual formulas or
+                spreadsheets that are error-prone and inconvenient on mobile devices.
+            </p>
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Solution:</h2>
+            <p>I built a cross-platform mobile app that allows students to input courses and grades and instantly see
+                their GPA, focusing on clarity, speed, and ease of use.
+            </p>
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Technical Decisions:</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>React Native with Expo for rapid cross-platform development and consistent behavior across devices
+                </li>
+                <li>TypeScript for type safety and improved developer experience</li>
+                <li>Local state management to provide instant feedback without unnecessary backend complexity</li>
+                <li>Component-based architecture to keep course and grade inputs reusable and maintainable</li>
+            </ul>
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Challenges:</h2>
+            <p>
+                Designing an input flow that supports multiple courses while remaining simple and intuitive, without
+                overwhelming the user or introducing calculation errors.
+            </p>
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Outcome:</h2>
+            <p>
+                The app provides a fast and reliable way for students to calculate GPA and serves as a solid foundation
+                for
+                future features such as saved semesters, grading scale customization, and cloud sync.
+            </p>
+
+        </section>
+
+        <!-- Improvement Section-->
+        <section id="improvement">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-8">Future Improvements</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Implement user authentication and cloud sync for saving GPA data across devices.</li>
+                <li>Add support for different grading scales and custom course weights.</li>
+                <li>Include a history feature to track GPA changes over time.</li>
+                <li>Enhance the UI with themes and accessibility options.</li>
+            </ul>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/project-details-navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+
+    <script src="animation.js" defer></script>
+
+    <script>
+        feather.replace()
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x7e22ce,
+            backgroundColor: 0x111827,
+            points: 12.0,
+            maxDistance: 22.0,
+            spacing: 18.0,
+        })
+    </script>
+
+</body>
+
+</html>
