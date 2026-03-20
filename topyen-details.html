@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topyen</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="animation.css" />
+</head>
+
+<body class="font-poppins bg-gray-900 text-white">
+    <project-details-navbar></project-details-navbar>
+
+    <div id="vanta-bg" class="fixed inset-0 -z-10"></div>
+
+    <main class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <section id="header">
+
+            <div class="project-card tilt reveal" data-reveal="up" data-delay="50">
+                <div class="project-content">
+                    <h3 class="text-lg sm:text-xl font-semibold">Topyen</h3>
+                    <p class="text-sm sm:text-base text-gray-300">
+                        A mobile application that helped my father with inventory
+                        management and sales calculations for his business, built with React Native
+                        and Expo for a smooth user experience and efficient performance.
+                    </p>
+                    <div class="project-tags flex flex-wrap gap-2 mt-2">
+                        <span class="bg-gray-800 px-2 py-1 rounded text-sm">React Native</span>
+                        <span class="bg-gray-800 px-2 py-1 rounded text-sm">TypeScript</span>
+                        <span class="bg-gray-800 px-2 py-1 rounded text-sm">AsyncStorage</span>
+                        <span class="bg-gray-800 px-2 py-1 rounded text-sm">Expo</span>
+                    </div>
+                    <a href="https://github.com/KingSlayer-double07/topyen.git" class="project-link">View
+                        Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Content Section-->
+        <section id="content" class="mt-8">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4">Problem</h2>
+            <p>My father needed a way to efficiently manage his inventory and calculate sales for his business, but he
+                was struggling with manual methods and spreadsheets.</p>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Solution</h2>
+            <p>I developed a mobile application that streamlined inventory management and sales calculations for my
+                father's business, providing a more efficient and accurate solution than manual methods.</p>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Technical Decisions</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>React Native + Expo for cross-platform support and faster iteration</li>
+                <li>AsyncStorage for local data persistence</li>
+                <li>TypeScript for type safety and improved development experience</li>
+            </ul>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Challenges</h2>
+            <p>One of the major challenges was ensuring the app was able to replicate the functionality of the existing
+                manual processes without becoming too complex.</p>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-6">Outcome</h2>
+            <p>The app successfully improved the efficiency and accuracy of inventory management and sales calculations
+                for my father's business, reducing manual effort and minimizing errors.</p>
+        </section>
+
+
+        <!-- Improvement Section-->
+        <section id="improvement">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 mt-8">Future Improvements</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Add cloud synchronization to allow access to inventory and sales data across multiple devices.
+                </li>
+                <li>Implement advanced reporting and analytics features to provide insights into sales trends and
+                    inventory performance.</li>
+                <li>Develop a user-friendly interface for easier navigation and improved user experience.</li>
+                <li>Integrate with accounting software for seamless data export and import.</li>
+            </ul>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/project-details-navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+
+    <script src="animation.js" defer></script>
+
+    <script>
+        feather.replace()
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x7e22ce,
+            backgroundColor: 0x111827,
+            points: 12.0,
+            maxDistance: 22.0,
+            spacing: 18.0,
+        })
+    </script>
+</body>
+
+</html>
