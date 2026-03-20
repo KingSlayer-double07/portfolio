@@ -1,5 +1,6 @@
 class CustomNavbar extends HTMLElement {
   connectedCallback() {
+    const homeHref = this.getAttribute('home-href') || '#about'
     this.attachShadow({ mode: "open" })
     this.shadowRoot.innerHTML = `
             <style>
@@ -112,7 +113,7 @@ class CustomNavbar extends HTMLElement {
             </style>
             
             <nav>
-                <a href="#about" class="logo">Favour Akande</a>
+                <a href="${homeHref}" class="logo">Favour Akande</a>
                 
                 <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                     <svg viewBox="0 0 24 24">
@@ -123,9 +124,9 @@ class CustomNavbar extends HTMLElement {
                 </button>
                 
                 <ul class="nav-links" id="nav-links">
-                    <li><a class="nav__link" href="#about">01. About</a></li>
-                    <li><a class="nav__link" href="#projects">02. Projects</a></li>
-                    <li><a class="nav__link" href="#contact">03. Contact</a></li>
+                    <li><a class="nav__link" href="${homeHref}#about">01. About</a></li>
+                    <li><a class="nav__link" href="${homeHref}#projects">02. Projects</a></li>
+                    <li><a class="nav__link" href="${homeHref}#contact">03. Contact</a></li>
                 </ul>
             </nav>
 
