@@ -133,7 +133,6 @@ class ProjectDetailsNavbar extends HTMLElement {
 
     // Initialize mobile menu functionality
     this.initMobileMenu()
-    this.initActiveLink()
   }
 
   initMobileMenu() {
@@ -154,33 +153,6 @@ class ProjectDetailsNavbar extends HTMLElement {
     })
   }
 
-  initActiveLink() {
-    const sections = [...document.querySelectorAll("section[id]")]
-    const links = [...this.shadowRoot.querySelectorAll(".nav__link")]
-
-    const setActive = () => {
-      const y = window.scrollY + 120
-      let activeId = null
-      for (const s of sections) {
-        const top = s.offsetTop
-        const bottom = top + s.offsetHeight
-        if (y >= top && y < bottom) {
-          activeId = s.id
-          break
-        }
-      }
-      links.forEach((a) => {
-        const href = a.getAttribute("href") || ""
-        const id = href.startsWith("#") ? href.slice(1) : null
-        a.removeAttribute("aria-current")
-        if (id && id === activeId) a.setAttribute("aria-current", "page")
-      })
-    }
-
-    window.addEventListener("scroll", setActive)
-    window.addEventListener("load", setActive)
-    setActive()
-  }
 }
 
 customElements.define("project-details-navbar", ProjectDetailsNavbar)
