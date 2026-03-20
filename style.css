@@ -173,11 +173,6 @@ button:focus-visible,
     box-shadow: 0 10px 25px -5px rgba(126, 34, 206, 0.2);
 }
 
-.project-image {
-    height: 200px;
-    overflow: hidden;
-}
-
 .project-image img {
     width: 100%;
     height: auto;
